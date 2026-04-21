@@ -1,0 +1,67 @@
+===========================================================================
+  SAP DATA DICTIONARY — CUSTOM STRUCTURE DEFINITION
+  Object Name : ZSSODATA
+  Object Type : Structure (Transparent)
+  Description : Custom output structure for Sales Order ALV Report ZSOLIST
+  Created By  : Afiyah Firdous | Roll No: 2306092
+  School      : School of Computer Engineering, KIIT University
+  Transaction : SE11 (ABAP Dictionary)
+===========================================================================
+
+HOW TO CREATE IN SAP:
+---------------------
+1. Open Transaction SE11
+2. Select radio button: "Data type"
+3. Enter name: ZSSODATA
+4. Click "Create"
+5. Select type: "Structure"
+6. Enter Short Description: "Custom Structure for Sales Order ALV Report"
+7. Add the following fields in the "Components" tab:
+8. Save and Activate (Ctrl + F3)
+
+---------------------------------------------------------------------------
+  FIELD DEFINITIONS
+---------------------------------------------------------------------------
+
+  No.  | Field Name | Data Element      | Short Description
+  -----|------------|-------------------|----------------------------------
+  1    | VBELN      | VBELN_VA          | Sales and Distribution Doc. No.
+  2    | POSNR      | POSNR_VA          | Item Number of the SD Document
+  3    | AUART      | AUART             | Sales Document Type
+  4    | VKORG      | VKORG             | Sales Organization
+  5    | VTWEG      | VTWEG             | Distribution Channel
+  6    | SPART      | SPART             | Division
+  7    | MATNR      | MATNR             | Material Number
+  8    | PSTYV      | PSTYV             | Sales Document Item Category
+  9    | ZMENG      | ZMENG             | Target Quantity in Sales Units
+  10   | ZIEME      | VRKME             | Sales Unit of Measure
+  11   | NETWR      | NETWR             | Net Value of the Order Item
+  12   | WAERK      | WAERK_D           | Document Currency
+
+---------------------------------------------------------------------------
+  NOTES
+---------------------------------------------------------------------------
+
+- All data elements listed above are standard SAP data elements available
+  in any SAP ERP or S/4HANA system. No custom data elements are required.
+
+- This structure is referenced in the ABAP report ZSOLIST via the
+  parameter I_STRUCTURE_NAME = 'ZSSODATA' in the ALV method
+  SET_TABLE_FOR_FIRST_DISPLAY. SAP automatically derives the field
+  catalog (column labels, types, lengths) from this structure definition.
+
+- The internal table GT_SOD in report ZSOLIST is declared as:
+    DATA: gt_sod TYPE STANDARD TABLE OF zssodata
+
+- Fields VBELN and POSNR together form the primary key of a sales order
+  line item (header + item combination from VBAK and VBAP respectively).
+
+- NETWR (Net Value) and WAERK (Currency) are paired fields — WAERK holds
+  the currency unit for the monetary value stored in NETWR.
+
+- ZMENG (Target Quantity) and ZIEME (Unit of Measure) are paired fields —
+  ZIEME holds the unit for the quantity stored in ZMENG.
+
+===========================================================================
+  END OF STRUCTURE DEFINITION
+===========================================================================
